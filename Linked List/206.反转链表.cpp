@@ -18,16 +18,28 @@
 class Solution {
 public:
     ListNode* reverseList(ListNode* head) {
-        // 定义pre 和 cur 直接从头节点开始反转 pre->next = cur、 cur->next = head 
-        ListNode* prev = nullptr;
-        ListNode* curr = head;
-        while (curr) {
-            ListNode* next = curr->next;
-            curr->next = prev;
-            prev = curr;
-            curr = next;
+        ListNode* temp;
+        ListNode* cur = head;
+        ListNode* pre = NULL;
+        while (cur) {
+            temp = cur->next;
+            cur->next = pre;
+            pre = cur;
+            cur = temp;
         }
-        return prev;
+        return pre;
+
+        // 递归法
+        /* if(head == NULL) return NULL;
+        if (head->next == NULL) return head;
+        
+        // 递归调用，翻转第二个节点开始往后的链表
+        ListNode *last = reverseList(head->next);
+        // 翻转头节点与第二个节点的指向
+        head->next->next = head;
+        // 此时的 head 节点为尾节点，next 需要指向 NULL
+        head->next = NULL;
+        return last; */
     }
 };
 // @lc code=end

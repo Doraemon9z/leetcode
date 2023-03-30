@@ -1,7 +1,7 @@
 /*
- * @lc app=leetcode.cn id=144 lang=cpp
+ * @lc app=leetcode.cn id=94 lang=cpp
  *
- * [144] 二叉树的前序遍历
+ * [94] 二叉树的中序遍历
  */
 
 // @lc code=start
@@ -21,12 +21,12 @@ public:
     // 递归
     /* void traversal(TreeNode* cur, vector<int>& vec) {
         if (cur == nullptr) return;
-        vec.push_back(cur->val);
         traversal(cur->left, vec);
+        vec.push_back(cur->val);
         traversal(cur->right, vec);
     } */
 
-    vector<int> preorderTraversal(TreeNode* root) {
+    vector<int> inorderTraversal(TreeNode* root) {
         // 统一迭代
         vector<int> result;
         stack<TreeNode*> st;
@@ -36,9 +36,9 @@ public:
             if (node != nullptr) {
                 st.pop();
                 if (node->right) st.push(node->right);
-                if (node->left) st.push(node->left);
                 st.push(node);
                 st.push(nullptr);
+                if (node->left) st.push(node->left);
             } else {
                 st.pop();
                 node = st.top();
@@ -47,26 +47,32 @@ public:
             }
         }
         return result;
+        
 
-        
-        
+
+
+
+
         // 迭代
         /* stack<TreeNode*> st;
         vector<int> result;
-        if (root == nullptr) return result;
-        st.push(root);
-        while (!st.empty()) {
-            TreeNode* node = st.top();
-            st.pop();
-            result.push_back(node->val);
-            if (node->right) st.push(node->right);
-            if (node->left) st.push(node->left);
+        TreeNode* cur = root;
+        while (cur != nullptr || !st.empty()) {
+            if (cur != nullptr) {
+                st.push(cur);
+                cur = cur->left;
+            } else {
+                cur = st.top();
+                st.pop();
+                result.push_back(cur->val);
+                cur = cur->right;
+            }
         }
         return result; */
 
 
-
-
+        
+        
         // 递归
         /* vector<int> result;
         traversal(root, result);

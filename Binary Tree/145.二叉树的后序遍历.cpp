@@ -1,7 +1,7 @@
 /*
- * @lc app=leetcode.cn id=144 lang=cpp
+ * @lc app=leetcode.cn id=145 lang=cpp
  *
- * [144] 二叉树的前序遍历
+ * [145] 二叉树的后序遍历
  */
 
 // @lc code=start
@@ -21,12 +21,12 @@ public:
     // 递归
     /* void traversal(TreeNode* cur, vector<int>& vec) {
         if (cur == nullptr) return;
-        vec.push_back(cur->val);
         traversal(cur->left, vec);
         traversal(cur->right, vec);
+        vec.push_back(cur->val);
     } */
 
-    vector<int> preorderTraversal(TreeNode* root) {
+    vector<int> postorderTraversal(TreeNode* root) {
         // 统一迭代
         vector<int> result;
         stack<TreeNode*> st;
@@ -35,10 +35,10 @@ public:
             TreeNode* node = st.top();
             if (node != nullptr) {
                 st.pop();
-                if (node->right) st.push(node->right);
-                if (node->left) st.push(node->left);
                 st.push(node);
                 st.push(nullptr);
+                if (node->right) st.push(node->right);
+                if (node->left) st.push(node->left);
             } else {
                 st.pop();
                 node = st.top();
@@ -47,7 +47,6 @@ public:
             }
         }
         return result;
-
         
         
         // 迭代
@@ -59,15 +58,18 @@ public:
             TreeNode* node = st.top();
             st.pop();
             result.push_back(node->val);
-            if (node->right) st.push(node->right);
             if (node->left) st.push(node->left);
+            if (node->right) st.push(node->right);
         }
+        reverse(result.begin(), result.end());
         return result; */
+        
+        
 
 
 
 
-        // 递归
+        // 递归 
         /* vector<int> result;
         traversal(root, result);
         return result; */

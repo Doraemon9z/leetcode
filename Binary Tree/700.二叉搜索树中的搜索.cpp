@@ -1,7 +1,7 @@
 /*
- * @lc app=leetcode.cn id=101 lang=cpp
+ * @lc app=leetcode.cn id=700 lang=cpp
  *
- * [101] 对称二叉树
+ * [700] 二叉搜索树中的搜索
  */
 
 // @lc code=start
@@ -18,8 +18,12 @@
  */
 class Solution {
 public:
-    bool isSymmetric(TreeNode* root) {
-
+    TreeNode* searchBST(TreeNode* root, int val) {
+        if (!root || root->val == val) return root;
+        TreeNode* result = NULL;
+        if (root->val > val) result = searchBST(root->left, val);
+        if (root->val < val) result = searchBST(root->right, val);
+        return result;
     }
 };
 // @lc code=end

@@ -1,0 +1,5 @@
+git status
+git add .
+git status
+git commit -m 'https://github.com/Doraemon9z/leetcode.git'
+git push 
